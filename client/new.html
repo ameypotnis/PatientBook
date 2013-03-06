@@ -126,12 +126,18 @@
             </div>
         </div>
         <div class="row">
-            <button data-bind='click: save'>Save to JSON</button>
-            <div class="span12">
-                <h4>JSON</h4>
+            <div class="control-group">
+                <div class="controls">
+                    <button class="ui-button-primary"  data-bind="click: add">Save</button>
+                    <button data-bind='click: save'>Save to JSON</button>
+                </div>
+            </div>
+            <div class="span4">
+                <h4>Main</h4>
                 <textarea class="input-xlarge" data-bind='value: lastSavedJson' rows='5' cols='160' disabled='disabled'> </textarea>
             </div>
         </div>
+    </div>
 </form>
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../assets/js/bootstrap.min.js"></script>

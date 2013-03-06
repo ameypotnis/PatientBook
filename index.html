@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" key="text/css" href="./main.css">
+    <title></title>
+</head>
+<body>
+<div class='liveExample'>
+
+    <h2>Patient list</h2>
+    <div id='contactsList'>
+        <table class='contactsEditor'>
+            <tbody data-bind="foreach: diagnosis">
+            <tr>
+                <td>
+                    <h2>Patient Details</h2>
+                    First Name : <input data-bind='value: firstName' />
+                    LastName : <input data-bind='value: lastName' />
+                    <div><a href='#' data-bind='click: $root.removePatient'>Delete</a></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Diagnosis</h3>
+                    <table>
+                        <tbody data-bind="foreach: diagnosis">
+                        <tr>
+                            <td><input data-bind='value: key' /></td>
+                            <td><input data-bind='value: value' /></td>
+                            <td><a href='#' data-bind='click: $root.removeDiagnosis'>Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href='#' data-bind='click: $root.addDiagnosis'>Add diagnosis</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Treatments</h3>
+                    <table>
+                        <tbody data-bind="foreach: treatment">
+                        <tr>
+                            <td><input data-bind='value: key' /></td>
+                            <td><input data-bind='value: value' /></td>
+                            <td><a href='#' data-bind='click: $root.removeTreatment'>Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href='#' data-bind='click: $root.addTreatment'>Add treatment</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p>
+        <button data-bind='click: addContact'>Add a Patient</button>
+        <button data-bind='click: save, enable: diagnosis().length > 0'>Save to JSON</button>
+    </p>
+
+    <textarea data-bind='value: lastSavedJson' rows='5' cols='60' disabled='disabled'> </textarea>
+
+</div>
+<script key="text/javascript" src="./knockout-2.2.1.debug.js"></script>
+<script key="text/javascript" src="./jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script>
+    var initialData = [
+        { firstName: "Kunal", lastName: "Chand", diagnosis: [
+            { key: "BP", value: "140" },
+            { key: "HB", value: "12"}], treatment: [
+            { key: "pill", value: "Inam 5" }]
+        }
+    ];
+
+    var ContactsModel = function(diagnosis) {
+        var self = this;
+        self.diagnosis = ko.observableArray(ko.utils.arrayMap(diagnosis, function(Patient) {
+            return { firstName: Patient.firstName, lastName: Patient.lastName, diagnosis: ko.observableArray(Patient.diagnosis), treatment: ko.observableArray(Patient.treatment) };
+        }));
+
+        self.addContact = function() {
+            self.diagnosis.push({
+                firstName: "",
+                lastName: "",
+                diagnosis: ko.observableArray(),
+                treatment: ko.observableArray()
+            });
+        };
+
+        self.removePatient = function(Patient) {
+            self.diagnosis.remove(Patient);
+        };
+
+        self.addDiagnosis = function(Patient) {
+            Patient.diagnosis.push({
+                key: "",
+                value: ""
+            });
+        };
+
+        self.removeDiagnosis = function(diagnosis) {
+            $.each(self.diagnosis(), function() { this.diagnosis.remove(diagnosis) })
+        };
+
+        self.addTreatment = function(Patient) {
+            Patient.treatment.push({
+                key: "",
+                value: ""
+            });
+        };
+
+        self.removeTreatment = function(treatment) {
+            $.each(self.treatment(), function() { this.treatment.remove(treatment) })
+        };
+
+        self.save = function() {
+            self.lastSavedJson(JSON.stringify(ko.toJS(self.diagnosis), null, 2));
+        };
+
+        self.lastSavedJson = ko.observable("")
+    };
+
+    ko.applyBindings(new ContactsModel(initialData));
+</script>
+</body>
+</html>

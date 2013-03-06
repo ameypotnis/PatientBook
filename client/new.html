@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PatientBook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple patient book.">
+    <meta name="author" content="Addy Osmani">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet"
+           href="css/custom-theme/jquery-ui-1.10.0.custom.css">-->
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../assets/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/custom-theme/jquery.ui.1.10.0.ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../assets/css/docs.css">
+    <link rel="stylesheet"
+          href="../assets/js/google-code-prettify/prettify.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed"
+          href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar"
+      data-twttr-rendered="true">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse"
+                    data-target=".nav-collapse">
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Patient Book</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./appointments.html">Appointments</a></li>
+                    <li><a href="./records.html">Records</a></li>
+                    <li class="active"><a href="./new.html">New</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form class="form-horizontal">
+    <div class="container">
+        <div class="row">
+            <div id="legend" class="">
+                <legend class="">Personal information</legend>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="firstname">Firstname:</label>
+                        <input id="firstname" required data-bind="value: firstName" type="text" placeholder="First" class="input">
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="middle">Middle:</label> <input id="middle" data-bind="value: middleName" type="text" placeholder="Middle" class="input">
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="lastname">Lastname:</label> <input id="lastname" required data-bind="value: lastName" type="text" placeholder="Last" class="input">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="span4">
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="sex">Sex:</label> <select id="sex" required data-bind="value: sex"  class="input-small">
+                        <option></option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="age">Age:</label> <input id="age" type="text" required data-bind="value: age"  placeholder="Age" class="input-small">
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <div class="controls">
+                        <label for="married">Marital status:</label> <select id="married" data-bind="value: maritalStatus" class="input-small">
+                        <option></option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button data-bind='click: save'>Save to JSON</button>
+            <div class="span12">
+                <h4>JSON</h4>
+                <textarea class="input-xlarge" data-bind='value: lastSavedJson' rows='5' cols='160' disabled='disabled'> </textarea>
+            </div>
+        </div>
+</form>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../assets/js/bootstrap.min.js"></script>
+<!--<script src="../assets/js/jquery-1.9.0.min.js"></script>
+<script src="../assets/js/holder.js"></script>
+<script src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="../assets/js/google-code-prettify/prettify.js"></script>
+<script src="../assets/js/docs.js"></script>
+<script src="../assets/js/demo.js"></script>-->
+<script type="text/javascript" src="../assets/js/underscore.js"></script>
+<script type="text/javascript" src="../assets/js/knockout-2.2.1.debug.js"></script>
+<script type="text/javascript" src="../assets/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src ="../assets/js/jquery.validate.js"></script>
+<script type="text/javascript" src ="../assets/js/knockout.validation.js"></script>
+<script type="text/javascript" src ="./js/Patient.js"></script>
+<script>
+    viewModel = new PatientViewModel();
+    ko.applyBindings(viewModel);
+</script>
+</body>
+</html>

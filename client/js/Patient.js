@@ -1,5 +1,5 @@
 var PatientViewModel = function() {
-    var self = this;
+    self = {};
     var blank = '';
 
     self.firstName = ko.observable(blank).extend({ required: true });
@@ -9,13 +9,13 @@ var PatientViewModel = function() {
     self.sex = ko.observable(blank).extend({ required: true });;
     self.maritalStatus = ko.observable(blank);
 
-    self.complaint = ko.observableArray();
+    self.complaint = ko.observable(blank);
+    self.associatedComplaint = ko.observable(blank);
     self.history = ko.observableArray();
 
     self.lastSavedJson = ko.observable("");
     self.hasSuccessfullySaved = ko.observable(false);
     self.hasSuccessfullyLoaded = ko.observable(false);
-    self.resultOfSuccessfullyLoaded = null;
 
     //private
     function validate() {
@@ -44,7 +44,7 @@ var PatientViewModel = function() {
         self.lastSavedJson(JSON.stringify(ko.toJS(self), null, 2));
     };
 
-    self.load = function(searchString, result){
+    self.load = function(searchString){
         jQuery.ajax({
             url: "http://localhost:3000/patient/" + searchString,
             dataType: "json",
@@ -56,7 +56,27 @@ var PatientViewModel = function() {
                 self.lastName(data.lastName);
                 self.age(data.age);
                 self.sex(data.sex);
+                self.history(data.history);
             }
         });
     }
+
+    self.addHistory = function(){
+        self.history.push({key: '', value: ''});
+    }
+
+    self.saveHistory = function(){
+        var data = { history: ko.toJSON(self.history())};
+        jQuery.ajax({
+            url: "http://localhost:3000/patient/addHistory",
+            data: data,
+            type: "POST",
+            dataType: "json",
+            success: function(data){
+//                self.hasSuccessfullySaved(true);
+            }
+        });
+    }
+
+    return self;
 }

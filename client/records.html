@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PatientBook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple patient book.">
+    <meta name="author" content="Addy Osmani">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/jquery-ui-1.10.1.custom.css">
+    <!--<link rel="stylesheet"
+        href="css/custom-theme/jquery-ui-1.10.0.custom.css">-->
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../assets/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/custom-theme/jquery.ui.1.10.0.ie.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../assets/css/docs.css">
+    <link rel="stylesheet"
+          href="../assets/js/google-code-prettify/prettify.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed"
+          href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="../assets/ico/favicon.png">
+
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar"
+      data-twttr-rendered="true">
+
+<!-- Navbar
+    ================================================== -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse"
+                    data-target=".nav-collapse">
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#">Patient Book</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./appointments.html">Appointments</a></li>
+                    <li class="active"><a href="./records.html">Records</a></li>
+                    <li><a href="./new.html">New</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <section id="top">
+            <div class="page-header">
+                <h1><span data-bind="text: firstName"></span>&nbsp;<span data-bind="text: lastName"></span></h1>
+                <h4>0001 - Cronic case</h4>
+                <h5>Age:<span data-bind="text: age"></span> &nbsp; Sex: <span data-bind="text: sex"> </span></h5>
+
+                Jump to <a href="#complaint"><i class="icon-chevron-right"></i>Complaint</a>
+                <a href="#diagnosis"><i class="icon-chevron-right"></i>Diagnosis</a>
+                <a href="#history"><i class="icon-chevron-right"></i>History</a> <a
+                    href="#personal"><i class="icon-chevron-right"></i>Personal</a>
+            </div>
+        </section>
+    </div>
+    <div class="row">
+        <h3>Follow up</h3>
+        <form class="form-inline">
+            <input type="text" class="input" placeholder="Medicine suggested">
+            <input type="text" class="input" placeholder="Remarks">
+            <button type="submit" class="btn">Add</button>
+        </form>
+
+        <table class="table table-condensed table-hover">
+            <thead>
+            <tr>
+                <th>Estimated Follow-up Date</th>
+                <th>Actual Follow-up Date</th>
+                <th>Medicine suggested</th>
+                <th>Remarks</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>07/02/2013</td>
+                <td>10/02/2013</td>
+                <td>High BP baladona</td>
+                <td>Sulpha reaction</td>
+            </tr>
+            <tr>
+                <td>01/02/2013</td>
+                <td>03/02/2013</td>
+                <td>Highbaladona</td>
+                <td>Sulpha reaction</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <section id="complaint">
+            <h3>Complaint</h3>
+            <div class="span8">
+                <h4>Main</h4>
+                <textarea rows="5" class="input-xlarge" data-bind="text: complaint"
+                          placeholder="Complaint here..."></textarea>
+            </div>
+            <div class="span4">
+                <h4>Associated</h4>
+                <textarea rows="5" class="input-xlarge"
+                          placeholder="Associated Complaint here..."></textarea>
+            </div>
+        </section>
+    </div>
+    <div class="row">
+        <section id="history">
+            <h3>History</h3>
+            <div data-bind="foreach: viewModel.history()"  class="row">
+                <div class="span6" >
+                    <input type="text" data-bind="value: key"
+                           class="input">
+                    <input type="text" data-bind="value: value"
+                           class="input">
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6">
+                    <button type="submit" data-bind="click: addHistory" class="btn">Add</button>
+                    <button class="ui-button-primary" data-bind="click: saveHistory">Save</button>
+                </div>
+            </div>
+            <p class="pull-right">
+                <a href="#top">Back to top</a>
+            </p>
+        </section>
+    </div>
+    <div class="row">
+        <section id="diagnosis">
+            <div id="diagnosis">
+                <h3>Diagnosis</h3>
+                <p>
+                </p>
+            </div>
+            <p class="pull-right">
+                <a href="#top">Back to top</a>
+            </p>
+        </section>
+    </div>
+    <div class="row">
+        <section id="test">
+            <div id="test">
+                <h3>Tests</h3>
+                <p>
+                    <a href="#" title="That's what this widget is">test</a> can be
+                    attached to any element. When you hover the element with your
+                    mouse, the title attribute is displayed in a little box next to
+                    the element, just like a native tooltip.
+                </p>
+            </div>
+            <p class="pull-right">
+                <a href="#top">Back to top</a>
+            </p>
+        </section>
+    </div>
+    <div class="row">
+        <section id="personal">
+            <div id="personal">
+                <h3>Personal details</h3>
+                <div class="span12">
+                    <p>'You ought to be ashamed of yourself for asking such a
+                        simple question,' added the Gryphon; and then they both sat
+                        silent and looked at poor Alice, who felt ready to sink into the
+                        earth. At last the Gryphon said to the Mock Turtle, 'Drive on,
+                        old fellow! Don't be all day about it!' and he went on in these
+                        words: 'Yes, we went to school in the sea, though you mayn't
+                        believe it—' 'I never said I didn't!' interrupted Alice. 'You
+                        did,' said the Mock Turtle.</p>
+                    <div>
+							<span class="badge badge-success">Posted 2012-08-02
+								20:47:04</span>
+                        <div class="pull-right">
+                            <span class="label">alice</span> <span class="label">story</span>
+                            <span class="label">blog</span> <span class="label">personal</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <p>'I am bound to Tahiti for more men.' 'Very good. Let me
+                        board you a moment—I come in peace.' With that he leaped from the
+                        canoe, swam to the boat; and climbing the gunwale, stood face to
+                        face with the captain. 'Cross your arms, sir; throw back your
+                        head. Now, repeat after me. As soon as Steelkilt leaves me, I
+                        swear to beach this boat on yonder island, and remain there six
+                        days. If I do not, may lightning strike me!'A pretty scholar,'
+                        laughed the Lakeman. 'Adios, Senor!' and leaping into the sea, he
+                        swam back to his comrades.</p>
+                    <div>
+							<span class="badge badge-success">Posted 2012-08-02
+								20:47:04</span>
+                        <div class="pull-right">
+                            <span class="label">alice</span> <span class="label">story</span>
+                            <span class="label">blog</span> <span class="label">personal</span>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <p class="pull-right">
+                <a href="#top">Back to top</a>
+            </p>
+        </section>
+    </div>
+</div>
+
+<script src="../assets/js/bootstrap.min.js"></script>
+<!--<script src="../assets/js/jquery-1.9.0.min.js"></script>
+<script src="../assets/js/holder.js"></script>
+<script src="../assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="../assets/js/google-code-prettify/prettify.js"></script>
+<script src="../assets/js/docs.js"></script>
+<script src="../assets/js/demo.js"></script>-->
+<script type="text/javascript" src="../assets/js/underscore.js"></script>
+<script type="text/javascript" src="../assets/js/knockout-2.2.1.debug.js"></script>
+<script type="text/javascript" src="../assets/js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src ="../assets/js/jquery.validate.js"></script>
+<script type="text/javascript" src ="../assets/js/knockout.validation.js"></script>
+<script type="text/javascript" src ="./js/Patient.js"></script>
+<script>
+    viewModel = new PatientViewModel();
+    ko.applyBindings(viewModel);
+    viewModel.load('Sam');
+</script>
+</body>
+</html>

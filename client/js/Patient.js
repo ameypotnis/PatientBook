@@ -14,6 +14,8 @@ var PatientViewModel = function() {
 
     self.lastSavedJson = ko.observable("");
     self.hasSuccessfullySaved = ko.observable(false);
+    self.hasSuccessfullyLoaded = ko.observable(false);
+    self.resultOfSuccessfullyLoaded = null;
 
     //private
     function validate() {
@@ -41,4 +43,20 @@ var PatientViewModel = function() {
     self.save = function() {
         self.lastSavedJson(JSON.stringify(ko.toJS(self), null, 2));
     };
+
+    self.load = function(searchString, result){
+        jQuery.ajax({
+            url: "http://localhost:3000/patient/" + searchString,
+            dataType: "json",
+            success: function(data) {
+                self.hasSuccessfullyLoaded(true);
+                //not working
+                // ko.mapping.fromJS(data[1], self);
+                self.firstName(data.firstName);
+                self.lastName(data.lastName);
+                self.age(data.age);
+                self.sex(data.sex);
+            }
+        });
+    }
 }

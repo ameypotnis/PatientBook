@@ -4,6 +4,12 @@ describe("Order viewmodel", function() {
     beforeEach(function() {
         //given
         viewModel = new PatientViewModel();
+
+        this.addMatchers({
+            toBeNotNullAndNotBlank: function() {
+                return (this.actual != null && this.actual !== '');
+            }
+        });
     });
 
     it("initializes", function() {
@@ -37,6 +43,22 @@ describe("Order viewmodel", function() {
 
         runs(function () {
             /*expect(parseInt(viewModel.patients()[1].age)).toBe(50);*/
+        });
+
+    });
+
+    it("Load single Patient from server", function() {
+        viewModel.load('Sam');
+
+        waitsFor(function() {
+            return viewModel.hasSuccessfullyLoaded();
+        }, "The patient should be loaded");
+
+        runs(function () {
+            expect(viewModel.firstName()).toBeNotNullAndNotBlank();
+            expect(viewModel.lastName()).toBeNotNullAndNotBlank();
+            expect(viewModel.age()).toBeNotNullAndNotBlank();
+            expect(viewModel.sex()).toBeNotNullAndNotBlank();
         });
 
     });

@@ -16,13 +16,13 @@ app.get('/patient', function(req, res) {
 app.get('/patient/:id', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Content-type","text/json");
-    res.send(db);
+    res.send({"firstName": "Sam", "lastName":"Los", "age": "40", "sex": "Male"});
 });
 app.post('/patient', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Content-type","text/json");
-    console.log(req.body);
-    db.push({"name": req.body.name, "age": req.body.age})
+    db.push(req.body);
+    console.log(db);
     res.send(db);
 });
 

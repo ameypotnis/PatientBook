@@ -45,6 +45,7 @@ exports.add = function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Content-type","text/json");
     var patient = req.body;
+    patient.histories = [];
     console.log('Adding patient: ' + JSON.stringify(patient));
     db.collection('patients', function(err, collection) {
         collection.insert(patient, {safe:true}, function(err, result) {
@@ -66,7 +67,7 @@ exports.update = function(req, res) {
     console.log('Updating patient: ' + id);
     console.log(JSON.stringify(patient));
     db.collection('patients', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, patient, {safe:true}, function(err, result) {
+        collection.update({'_id':new BSON.ObjectID(id)}, {'$set': patient }, function(err, result) {
             if (err) {
                 console.log('Error updating patient: ' + err);
                 res.send({'error':'An error has occurred'});

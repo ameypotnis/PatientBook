@@ -60,7 +60,7 @@ var PatientViewModel = function() {
                 self.lastName(data.lastName);
                 self.age(data.age);
                 self.sex(data.sex);
-//                self.histories(data.histories);
+                self.histories(data.histories);
             }
         });
     }
@@ -70,14 +70,15 @@ var PatientViewModel = function() {
     }
 
     self.saveHistory = function(){
-        var data = { histories: self.histories() };
+        var data = {histories: self.histories()}
+
         jQuery.ajax({
             url: URI + "/patients/" + self.objectId,
             data: data,
             type: "PUT",
             dataType: "json",
-            success: function(data){
-                self.hasSuccessfullySaved(true);
+            success: function(data) {
+//                self.hasSuccessfullySaved(true);
             }
         });
     }

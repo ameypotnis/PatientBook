@@ -134,12 +134,12 @@
     <div class="row">
         <section id="history">
             <h3>History</h3>
-            <div data-bind="foreach: viewModel.history()"  class="row">
+            <div data-bind="foreach: viewModel.histories"  class="row">
                 <div class="span6" >
                     <input type="text" data-bind="value: key"
-                           class="input">
+                           placeholder="Start typing..." class="input">
                     <input type="text" data-bind="value: value"
-                           class="input">
+                           placeholder="value" class="input">
                 </div>
             </div>
             <div class="row">
@@ -246,7 +246,7 @@
 <script>
     viewModel = new PatientViewModel();
     ko.applyBindings(viewModel);
-    viewModel.load('Sam');
+    viewModel.load('5139b4a13a51374311000004');
 </script>
 </body>
 </html>

@@ -21,8 +21,8 @@ describe("Order viewmodel", function() {
         expect(viewModel.sex()).toEqual(blank);
         expect(viewModel.maritalStatus()).toEqual(blank);
 
-        expect(viewModel.complaint().length).toEqual(0);
-        expect(viewModel.complaint().length).toEqual(0);
+        expect(viewModel.complaint()).toEqual(blank);
+        expect(viewModel.associatedComplaint()).toEqual(blank);
 
         //check validations
         expect(function(){viewModel.add()}).toThrow(new Error('Please fill all required fields'));
